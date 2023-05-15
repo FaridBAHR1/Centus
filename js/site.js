@@ -11,13 +11,12 @@ function getValues(){
     if(Number.isInteger(startValue) && Number.isInteger(endValue)){
         //call generateNumbers
         let numbers = generateNumbers(startValue, endValue);
+        //call displayNumbers
+        displayNumbers(numbers);
     }
     else{
         alert("Please enter an Integer");
     }
-
-    //call displayNumbers
-    displayNumbers(numbers);
 }
 
 //generate numbers from start to endvalue - model/logic
@@ -36,7 +35,13 @@ function generateNumbers(startValue, endValue){
 function displayNumbers(numbers){
     let templateRows = "";
     for (let index = 0; index < numbers.length; index++) {
-        let number = numbers[index];
-        templateRows += `<tr><td>${number}</td></tr>`;  
+        let className = "even";
+        let number = numbers[index]; //assignemnt check
+        if(number % 2 == 0) //equality check
+        {
+            className = "even";}
+        else {className = "odd";}
+        templateRows += `<tr><td class="${className}" >${number}</td></tr>`; //creating HTML Table
     };
+    document.getElementById("results").innerHTML = templateRows;
 }
