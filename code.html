@@ -55,20 +55,68 @@
     <!-- Main Section -->
     <main class="flex-shrink-0">
         <div class="container py-5 px-5 mt-5">
-            <h1 class="border-1 border-bottom border-dark">Centus's Code</h1>
+            <h1 class="border-1 border-bottom border-dark">Centus' Code</h1>
             <div class="row row-cols-1 row-cols-md-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        //Call function
-                        function Application_Main(){
-                            alert("Main Function");
+                        //get values from interface - controller/start
+                        function getValues(){
+                            //get value from page
+                            let startValue = document.getElementById("startValue").value;
+                            let endValue = document.getElementById("endValue").value;
+
+                            //parse into Integers - needed to validate input
+                            startValue = parseInt(startValue);
+                            endValue = parseInt(endValue);
+
+                            if(Number.isInteger(startValue) && Number.isInteger(endValue)){
+                                //call generateNumbers
+                                let numbers = generateNumbers(startValue, endValue);
+                                //call displayNumbers
+                                displayNumbers(numbers);
+                            }
+                            else{
+                                alert("Please enter an Integer");
+                            }
                         }
+
+                        //generate numbers from start to endvalue - model/logic
+                        function generateNumbers(startValue, endValue){
+                            let numbers = [];
+                            
+                            //get all numbers from start to end
+                            for (let index = startValue; index <= endValue; index++) {
+                                //execute loop until index = endValue
+                                numbers.push(index);
+                            }
+                            return numbers;
+                        }
+
+                        //display bold numbers - view/display
+                        function displayNumbers(numbers){
+                            let templateRows = "";
+                            for (let index = 0; index < numbers.length; index++) {
+                                let className = "even";
+                                let number = numbers[index]; //assignemnt check
+                                if(number % 2 == 0) //equality check
+                                {
+                                    className = "even";}
+                                else {className = "odd";}
+                                //The HTML Table code doesn't render, see source code on GitHub
+                                templateRows += `<tr><td class="${className}" >${number}</td></tr>`; //creating HTML Table
+                            };
+                            document.getElementById("results").innerHTML = templateRows;
                     </code></pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>Code structures in 1 function</p>
-                    <h5>Back problems</h5>
-                    <p>Alerts when you have back problems</p>
+                    <h3>The Goal of CENTUS</h3>
+                    <p>Centus - The goal of Centus is to learn about Variables, Functions, Loops, Arrays & Using the Debugger. It is our 1st example of Model View Controller. And our 1st use of Prism to display our Code.</p>
+                    <h4>getValues</h4>
+                    <p>getValue function. how to use getValues.</p>
+                    <h4>generateNumbers</h4>
+                    <p>generateNumbers function. how to use getValues.</p>
+                    <h4>displayNumbers</h4>
+                    <p>displayNumbers function. how to use getValues.</p>
                 </div>
             </div>
         </div>
